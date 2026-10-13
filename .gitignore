@@ -1,0 +1,7 @@
+local.properties
+.gradle/
+build/
+**/build/
+*.backup
+*.backup2
+MainActivity_backup.java.txt
