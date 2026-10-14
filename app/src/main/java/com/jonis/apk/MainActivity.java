@@ -29,6 +29,8 @@ private final String[] pestañas = {
 @Override
 protected void onCreate(Bundle estado) {
     super.onCreate(estado);
+
+    comprobarPermisoFlotante();
     preferencias = getSharedPreferences("jonis_config", MODE_PRIVATE);
 
     LinearLayout principal = new LinearLayout(this);
@@ -243,4 +245,29 @@ private void agregarSelectorEstilo() {
 
     contenido.addView(selector);
 }
+
+@Override
+protected void onResume() {
+    super.onResume();
+
+    if (android.provider.Settings.canDrawOverlays(this)) {
+        android.content.Intent intent =
+            new android.content.Intent(this, OverlayService.class);
+
+        startService(intent);
+    }
+}
+
+private void comprobarPermisoFlotante() {
+    if (!android.provider.Settings.canDrawOverlays(this)) {
+        android.content.Intent intent =
+            new android.content.Intent(
+                android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                android.net.Uri.parse("package:" + getPackageName())
+            );
+
+        startActivity(intent);
+    }
+}
+
 }
