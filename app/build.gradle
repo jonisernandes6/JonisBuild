@@ -3,11 +3,12 @@ plugins {
 }
 
 android {
-    namespace 'com.lvteam'
+    namespace 'com.jonis.apk'
     compileSdk 33
-
+    groovy
+    
     defaultConfig {
-        applicationId "com.lvteam"
+        applicationId "com.jonis.apk"
         minSdk 21
         targetSdk 33
         versionCode 1
