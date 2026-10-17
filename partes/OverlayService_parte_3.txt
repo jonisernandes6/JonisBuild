@@ -1,0 +1,78 @@
+    ancho,
+                alto,
+                Build.VERSION.SDK_INT >= 26
+                        ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+                        : WindowManager.LayoutParams.TYPE_PHONE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                        | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                        | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+                PixelFormat.TRANSLUCENT);
+    }
+
+    /* ----- METODOS AUXILIARES (solo prototipos) ----- */
+    private TextView titulo(String text) {
+        TextView t = new TextView(this);
+        t.setText(text);
+        t.setTextColor(Color.WHITE);
+        t.setTextSize(16);
+        t.setTypeface(null, android.graphics.Typeface.BOLD);
+        return t;
+    }
+
+    private Switch switchToggle(String label) {
+        Switch s = new Switch(this);
+        s.setText(label);
+        s.setTextColor(Color.LTGRAY);
+        s.setTextSize(14);
+        return s;
+    }
+
+    private Button botonSimple(String txt) {
+        Button b = new Button(this);
+        b.setText(txt);
+        b.setBackgroundColor(COLOR_HEADER);
+        b.setTextColor(Color.WHITE);
+        b.setAllCaps(false);
+        return b;
+    }
+
+    /* ----- CABECERA ARRASTRABLE ----- */
+    private void crearCabeceraPanel() {
+        LinearLayout cabecera = new LinearLayout(this);
+        cabecera.setOrientation(LinearLayout.HORIZONTAL);
+        cabecera.setBackground(forma(COLOR_HEADER, 8));
+        cabecera.setPadding(dp(8), dp(6), dp(8), dp(6));
+
+        TextView titleText = titulo("🔴 FF H4CK v3");
+        titleText.setTypeface(null, android.graphics.Typeface.BOLD_ITALIC);
+
+        dragArea = cabecera;          // zona de arrastre
+
+        Button btnClose = botonSimple("✕");
+        btnClose.setOnClickListener(v -> cerrarPanel());
+
+        cabecera.addView(titleText, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        cabecera.addView(btnClose, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        /* Listener para arrastrar el panel desde la cabecera */
+        dragArea.setOnTouchListener(new View.OnTouchListener() {
+            float sx, sy;
+            int ox, oy;
+
+            @Override
+            public boolean onTouch(View v, MotionEvent ev) {
+                if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                    sx = ev.getRawX();
+                    sy = ev.getRawY();
+                    ox = panelParams.x;
+                    oy = panelParams.y;
+                    return true;
+                }
+                if (ev.getAction() == MotionEvent.ACTION_MOVE) {
+                    panelParams.x = ox + (int) (ev.getRawX() - sx);
+                    panelParams.y = oy + (int) (ev.getRawY() - sy);
+                    wm.updateViewLayout(panel, pan

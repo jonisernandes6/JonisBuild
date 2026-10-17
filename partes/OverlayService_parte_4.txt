@@ -1,0 +1,26 @@
+elParams);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        // Si quieres que el panel se añada aquí, hazlo
+        // wm.addView(panel, panelParams);
+    }
+
+    /* ------- PUERTAS DE ENTRADA DE LOS MÉTODOS DE TAMAÑO ------- */
+    private int dp(int px) {
+        return (int) (px * getResources().getDisplayMetrics().density + 0.5f);
+    }
+
+    /* ------- METODOS QUE DEBERÍAS IMPLEMENTAR ------- */
+    private void togglePanel() { /* … */ }
+    private void cerrarPanel() { /* … */ }
+    private void mostrarPanel() { /* … */ }
+    private void crearNavegacionTabs() { /* … */ }
+    private ScrollView crearScrollContenido() { return new ScrollView(this); }
+    private android.graphics.drawable.Drawable forma(int color, int radius) { return null; }
+
+}
+

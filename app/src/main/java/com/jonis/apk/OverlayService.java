@@ -37,6 +37,8 @@ public class OverlayService extends Service {
 
     /* ESP */
     private boolean espEnabled = false;
+    private Thread hackThread;
+    private volatile boolean running = true;
     private boolean drawLine = false, drawBox = false, drawName = false, drawDistance = false;
     private int maxDistanceM = 150;
     private int boxStyleIndex = 0;          // 0=Corner | 1=Full
@@ -260,8 +262,48 @@ public class OverlayService extends Service {
     private void cerrarPanel() { /* … */ }
     private void mostrarPanel() { /* … */ }
     private void crearNavegacionTabs() { /* … */ }
-    private ScrollView crearScrollContenido() { return new ScrollView(this); }
-    private android.graphics.drawable.Drawable forma(int color, int radius) { return null; }
+    private ScrollView crearScrollContenido() {
+        ScrollView scroll = new ScrollView(this);
+        LinearLayout contentLayout = new LinearLayout(this);
+        contentLayout.setOrientation(LinearLayout.VERTICAL);
+        contentLayout.setPadding(dp(8), dp(8), dp(8), dp(8));
 
+        Switch espSwitch = switchToggle("👁️ ESP Enabled");
+
+        espSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            espEnabled = isChecked;
+            Log.d("JONIS_HACK", "ESP cambiado a: " + isChecked);
+
+            if (isChecked && hackThread == null) {
+                iniciarMotorHacks();
+            }
+        });
+
+        contentLayout.addView(espSwitch);
+        scroll.addView(contentLayout);
+        return scroll;
+    }
+
+    private android.graphics.drawable.Drawable forma(int color, int radius) { 
+        return null; 
+    }
+
+    private void iniciarMotorHacks() {
+        if (hackThread != null && hackThread.isAlive()) return;
+
+        hackThread = new Thread(() -> {
+            while (running && !Thread.currentThread().isInterrupted()) {
+                if (espEnabled) {
+                    Log.d("JONIS_HACK", "Espia activo...");
+                }
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+        hackThread.setDaemon(true);
+        hackThread.start();
+    }
 }
-

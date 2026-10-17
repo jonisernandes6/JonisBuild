@@ -1,0 +1,87 @@
+package com.jonis.apk;                     // <‑‑ 1. Corregido
+import android.app.Service;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.os.Handler;
+import android.os.IBinder;                   // <‑‑ 5. Importado
+import android.provider.Settings;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class OverlayService extends Service {
+
+    /* ----- CAMPOS ----- */
+    private WindowManager wm;
+    private LinearLayout panel;
+    private FrameLayout burbuja;            // contenedor de la burbuja
+    private View dragArea;                  // área para arrastrar panel
+    private SharedPreferences prefs;
+
+    /* ESP */
+    private boolean espEnabled = false;
+    private boolean drawLine = false, drawBox = false, drawName = false, drawDistance = false;
+    private int maxDistanceM = 150;
+    private int boxStyleIndex = 0;          // 0=Corner | 1=Full
+    private final String[] BOX_STYLES = {"Esquina", "Completo"};
+
+    /* COLORES */
+    private static final int COLOR_BG = Color.parseColor("#121420");
+    private static final int COLOR_HEADER = Color.parseColor("#FF374785");
+    private static final int COLOR_ACCENT = Color.RED;   // Rojo puro para destacar ESP
+
+    /* PARA EL PANEL */
+    private WindowManager.LayoutParams panelParams;      // se inicializará en crearPanelHack()
+
+    /* ----- MÉTODOS OVERRIDEN ----- */
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        if (!Settings.canDrawOverlays(this)) {
+            stopSelf();
+            return;
+        }
+
+        wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        prefs = getSharedPreferences("jonis_config", MODE_PRIVATE);
+
+        crearBurbujaFlotante();
+        crearPanelHack();
+        mostrarPanel();   // El panel queda oculto hasta que toques la burbuja
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    /* ----- BARRA DE BURBUJA ----- */
+    private void crearBurbujaFlotante() {
+        burbuja = new FrameLayout(this);
+        FrameLayout.LayoutParams lpIcon = new FrameLayout.LayoutParams(dp(58), dp(58));
+
+        ImageView icon = new ImageView(this);
+        icon.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                android.R.drawable.ic_dialog_info));
+        icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        GradientDrawable dIcon = new GradientDrawable();
+  
