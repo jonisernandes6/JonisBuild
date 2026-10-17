@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+
+Name: AndroidManifest.xml
+SHA-256-Digest: RGFNNNsKA9fZoExqOvxlukg5WQ11DYeuIlkCPdQv9dI=
+
+Name: classes.dex
+SHA-256-Digest: IlApyLIGf9u8rb2lD0E03zOH89x5oqZcUCZgt0lHZyw=
+
+Name: lib/arm64-v8a/liblvguard.so
+SHA-256-Digest: G+40EQ26kPX4pnp1XEz+d+Sjw/RAdl44Wmw8JPmrjoc=
+
+Name: lib/armeabi-v7a/liblvguard.so
+SHA-256-Digest: I2zGTERpWqLRhPkHbhJZF8KWG0XS4gpw0aZ8K00V2mg=
+
+Name: res/drawable/lv_team.png
+SHA-256-Digest: ABCJKepDNfRkcUmz68yf2PwzEElSnSsRxfjamD/bcQ4=
+
+Name: res/xml/backup_rules.xml
+SHA-256-Digest: ST+mAkTaeYIhSrDg+sjasq3imai6QmEZQKb0sjnXMbs=
+
+Name: res/xml/data_extraction_rules.xml
+SHA-256-Digest: KjSTgS+1TpyWECBQyF6Q/SUDMGWTyKiV6wIhfm4uVE4=
+
+Name: res/xml/network_security_config.xml
+SHA-256-Digest: O4eXY0C/SXc+u5ukx9mmz+wy+QJBS4VrufoXc/ZIwv8=
+
+Name: resources.arsc
+SHA-256-Digest: Aodd3LnsGcC88Ntr1uSQWfh45tPi2zw5Z7w7z4nldxE=
+

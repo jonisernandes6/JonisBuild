@@ -1,0 +1,17 @@
+version: 3.0.3-dirty
+apkFileName: jonis_trainer_v7.apk
+usesFramework:
+  ids:
+  - 1
+sdkInfo:
+  minSdkVersion: 23
+  targetSdkVersion: 35
+versionInfo:
+  versionCode: 23
+  versionName: 2.0.3
+resourcesInfo:
+  packageId: 127
+doNotCompress:
+- arsc
+- png
+- so

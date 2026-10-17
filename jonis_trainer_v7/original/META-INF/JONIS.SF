@@ -1,0 +1,32 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android)
+SHA-256-Digest-Manifest: WW/YWdJ0KF0dFKW1UuEqfbKIRdGc7I9WSKj1/i1MWFg=
+X-Android-APK-Signed: 2, 3
+
+Name: AndroidManifest.xml
+SHA-256-Digest: 2z3eWCaSXvcxqkQ3X/ZYbZ07DNY56KzMFFJWCDR5364=
+
+Name: classes.dex
+SHA-256-Digest: VIvSVdAiNvN8CqliJQcAZAfeDT3XYjvl1pFCfGqB0Iw=
+
+Name: lib/arm64-v8a/liblvguard.so
+SHA-256-Digest: E+HrTrBZi7VBRrdSdd18UBnH+GEzmLHC/tQd3V3d0Pk=
+
+Name: lib/armeabi-v7a/liblvguard.so
+SHA-256-Digest: /flhDfmebM3BgVapDi1eTsM4cFQ1l+Y4Ifw9lN6hh7M=
+
+Name: res/drawable/lv_team.png
+SHA-256-Digest: 8nso3gYtKV8D3ipNXe/KJVsNBr72JyFil1rEo2PeLIY=
+
+Name: res/xml/backup_rules.xml
+SHA-256-Digest: dTYr8XpBXCt18rKR3kl1huQzNL130p4LM/jJx9AHSTg=
+
+Name: res/xml/data_extraction_rules.xml
+SHA-256-Digest: nRv0ARvy7ME9qLezfrZ4nHn/zySFrp2rN9l0O2qsH7c=
+
+Name: res/xml/network_security_config.xml
+SHA-256-Digest: Wiwy84vX4hq2WPN81xeZ0UhqUEDgJGumSFxV1HWhkbE=
+
+Name: resources.arsc
+SHA-256-Digest: s/npDKm7OXoupRXbwzDykbv/NVOaTwKOek4yRPFRg+w=
+

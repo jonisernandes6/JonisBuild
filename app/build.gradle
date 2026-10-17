@@ -3,14 +3,33 @@ plugins {
 }
 
 android {
-    namespace 'com.jonis.apk'
+    namespace 'com.lvteam'
     compileSdk 33
 
     defaultConfig {
-        applicationId 'com.jonis.apk'
-        minSdk 23
-        targetSdk 28
+        applicationId "com.lvteam"
+        minSdk 21
+        targetSdk 33
         versionCode 1
-        versionName '1.0'
+        versionName "1.0"
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/smali']
+            res.srcDirs = ['src/main/res']
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
 }

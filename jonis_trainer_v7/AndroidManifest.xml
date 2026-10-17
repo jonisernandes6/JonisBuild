@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13.0.0" package="com.jonis.trainer" platformBuildVersionCode="33" platformBuildVersionName="13.0.0">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <application android:allowBackup="false" android:dataExtractionRules="@xml/data_extraction_rules" android:debuggable="true" android:extractNativeLibs="false" android:fullBackupContent="@xml/backup_rules" android:icon="@drawable/lv_team" android:label="@string/app_name" android:networkSecurityConfig="@xml/network_security_config" android:supportsRtl="true" android:theme="@style/AppTheme">
+        <activity android:name="com.lvteam.OverlayActivity"/>
+        <service android:exported="false" android:foregroundServiceType="dataSync" android:name="com.lvteam.OverlayService"/>
+        <activity android:exported="true" android:name="com.lvteam.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <service android:exported="false" android:name="com.lvteam.PacketCaptureService" android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
+    </application>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+</manifest>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <public type="drawable" name="lv_team" id="0x7f010000" />
+    <public type="string" name="action_open_overlay" id="0x7f020001" />
+    <public type="string" name="app_name" id="0x7f020002" />
+    <public type="string" name="title_lv_team" id="0x7f020005" />
+    <public type="style" name="AppTheme" id="0x7f030000" />
+    <public type="xml" name="backup_rules" id="0x7f040000" />
+    <public type="xml" name="data_extraction_rules" id="0x7f040001" />
+    <public type="xml" name="network_security_config" id="0x7f040002" />
+</resources>

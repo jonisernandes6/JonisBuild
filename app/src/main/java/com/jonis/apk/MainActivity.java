@@ -1,5 +1,4 @@
-package com.jonis.apk;
-
+import com.jonis.apk.overlay.OverlayView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.graphics.Color;
@@ -32,7 +31,41 @@ protected void onCreate(Bundle estado) {
 
     comprobarPermisoFlotante();
     preferencias = getSharedPreferences("jonis_config", MODE_PRIVATE);
+    // 1. Inicializar el WindowManager para crear ventanas flotantes
+    WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
+    // 2. Definir los parámetros de la ventana (Tamaño y Tipo)
+    WindowManager.LayoutParams params = new WindowManager.LayoutParams(
+        350, // Ancho
+        450, // Alto
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O 
+            ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY 
+            : WindowManager.LayoutParams.TYPE_PHONE,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | 
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, // Permite clicks a través si no tocas la UI
+        PixelFormat.TRANSLUCENT
+    );
+
+    // 3. Crear la instancia de tu OverlayView
+    OverlayView overlay = new OverlayView(this);
+
+    // 4. Agregar los botones funcionales
+    overlay.addItem("Aimbot", true, newState -> {
+        Log.d("JonisAPK", "Aimbot cambiado a: " + newState);
+        // Aquí conectarías con tu lógica nativa o servicio
+    });
+
+    overlay.addItem("ESP Wallhack", false, newState -> {
+        Log.d("JonisAPK", "ESP cambiado a: " + newState);
+    });
+
+    overlay.addItem("Speed Hack", false, newState -> {
+        Log.d("JonisAPK", "Speed cambiado a: " + newState);
+    });
+
+    // 5. Añadir la vista al sistema
+    windowManager.addView(overlay, params);
+    
     LinearLayout principal = new LinearLayout(this);
     principal.setOrientation(LinearLayout.VERTICAL);
     principal.setPadding(14, 14, 14, 14);

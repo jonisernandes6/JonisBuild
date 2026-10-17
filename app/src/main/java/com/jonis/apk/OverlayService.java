@@ -1,5 +1,4 @@
 package com.jonis.apk;                     // <‑‑ 1. Corregido
-
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
