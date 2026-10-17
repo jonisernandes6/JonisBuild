@@ -1,4 +1,7 @@
 import com.jonis.apk.overlay.OverlayView;
+import android.view.WindowManager;
+import android.graphics.PixelFormat;
+import android.os.Build;
 import android.app.Activity;
 import android.os.Bundle;
 import android.graphics.Color;
