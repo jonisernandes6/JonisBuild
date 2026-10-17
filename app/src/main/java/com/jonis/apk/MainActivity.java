@@ -291,7 +291,7 @@ protected void onResume() {
 
     if (android.provider.Settings.canDrawOverlays(this)) {
         android.content.Intent intent =
-            new android.content.Intent(this, OverlayService.class);
+            new android.content.Intent(this, com.jonis.apk.OverlayService.class);
 
         startService(intent);
     }
