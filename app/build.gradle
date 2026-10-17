@@ -1,11 +1,11 @@
 plugins {
     id 'com.android.application'
 }
-```groovy
+
 android {
     namespace 'com.jonis.apk'
     compileSdk 33
-    
+
     defaultConfig {
         applicationId "com.jonis.apk"
         minSdk 21
