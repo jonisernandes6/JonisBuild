@@ -1,4 +1,7 @@
-import com.jonis.apk.overlay.OverlayView;
+import com.jonis.apk.OverlayView;
+import android.util.Log;
+import android.content.Intent;
+import android.provider.Settings;
 import android.view.WindowManager;
 import android.graphics.PixelFormat;
 import android.os.Build;
