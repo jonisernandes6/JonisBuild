@@ -32,11 +32,26 @@ private final String[] pestañas = {
 };
 
 @Override
-protected void onCreate(Bundle estado) {
-    super.onCreate(estado);
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
+    // 🔒 NUEVO: Verificar permiso ANTES de tocar el WindowManager
+    if (!android.provider.Settings.canDrawOverlays(this)) {
+        new android.app.AlertDialog.Builder(this)
+            .setTitle("Permiso Oscuro")
+            .setMessage("Necesitas activar 'Dibujar sobre otras apps' para que funcione.")
+            .setPositiveButton("Ir a Ajustes", (dialog, which) -> {
+                startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
+            })
+            .setNegativeButton("Salir", (dialog, which) -> finish())
+            .show();
+        return; // ¡Salimos aquí! No intentamos crear la ventana sin permiso.
+    }
+
+    // --- CÓDIGO ORIGINAL PROTEGIDO ---
     comprobarPermisoFlotante();
     preferencias = getSharedPreferences("jonis_config", MODE_PRIVATE);
+
     // 1. Inicializar el WindowManager para crear ventanas flotantes
     WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
 
@@ -44,13 +59,22 @@ protected void onCreate(Bundle estado) {
     WindowManager.LayoutParams params = new WindowManager.LayoutParams(
         350, // Ancho
         450, // Alto
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O 
-            ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY 
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+            ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             : WindowManager.LayoutParams.TYPE_PHONE,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | 
-        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, // Permite clicks a través si no tocas la UI
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, 
         PixelFormat.TRANSLUCENT
     );
+
+    // 3. Crear la instancia de tu OverlayView (Asegúrate que 'R.layout.your_layout' sea correcto)
+    View overlay = LayoutInflater.from(this).inflate(R.layout.your_layout_name_here, null);
+
+    // 4. ⚠️ IMPORTANTE: Añadir la vista al WindowManager. Sin esto, no se ve.
+    windowManager.addView(overlay, params);
+
+    // Si tienes más lógica, añádela aquí dentro de la llave.
+}
 
     // 3. Crear la instancia de tu OverlayView
     OverlayView overlay = new OverlayView(this);
