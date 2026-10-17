@@ -1,4 +1,3 @@
-groovy
 pluginManagement {
 repositories {
 google()
