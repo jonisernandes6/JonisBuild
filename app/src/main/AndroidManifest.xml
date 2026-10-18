@@ -2,15 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jonis.apk">
 
-    <!-- PERMISOS CRÍTICOS -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme"> 
 
         <activity android:name=".MainActivity"
             android:exported="true">
@@ -20,11 +21,19 @@
             </intent-filter>
         </activity>
 
-        <!-- DECLARACIÓN DEL SERVICIO DE OVERLAY -->
-        <service 
-            android:name=".OverlayService" 
+        <service
+            android:name=".OverlayService"
             android:enabled="true"
             android:exported="false" />
+
+        <service
+            android:name=".JonisVpnService"
+            android:permission="android.permission.BIND_VPN_SERVICE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
 
     </application>
 </manifest>
