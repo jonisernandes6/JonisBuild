@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#222222">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CONTROL PANEL"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:padding="16dp"/>
+
+    <!-- Switch para activar/desactivar el Overlay -->
+    <Switch
+        android:id="@+id/switchEsp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activar Trampas/ESP"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"/>
+
+    <!-- Botón para iniciar VPN -->
+    <Button
+        android:id="@+id/btnStartVpn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Conectar VPN"
+        android:layout_margin="16dp"/>
+
+</LinearLayout>
